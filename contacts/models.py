@@ -20,3 +20,8 @@ class Contact(models.Model):
     city = models.CharField(max_length=255, null=True, blank=True)
     state = USStateField(null=True, blank=True)
     zip_code = USZipCodeField(null=True, blank=True)
+
+
+class Notes(models.Model):
+    note_link = models.ForeignKey(to=Contact, on_delete=models.CASCADE)
+    note = models.CharField(max_length=450)
