@@ -24,4 +24,5 @@ class Contact(models.Model):
 
 class Notes(models.Model):
     note_link = models.ForeignKey(to=Contact, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     note = models.CharField(max_length=450)
