@@ -37,21 +37,18 @@
     </div>
     {% endif %}
 
-    {% if contact.add_note %}
-        {% for note in contact.add_note.all %}
-        <div>
-            <div class="pr2"><!-- Note Icon Needed --></div>
-            <div>{{ add_note.note }}</div>
-            <div>{{ add_note.time_stamp }}</div>
-        </div>
-        {% endfor %}
-    {% endif %}
-
     <p>
         <a class="db" href= "{% url 'list_contacts' %}">Go Back to All Contacts</a>
         <a class="db" href="{% url 'add_note' contact_pk=contact.pk %}">Add Note</a>
         <a class="db" href="{% url 'edit_contact' pk=contact.pk %}">Edit Contact</a>    
         <a class="db red" href="{% url 'delete_contact' pk=contact.pk %}">Delete Contact</a>
     </p>
+
+    <div>
+        {% for note in contact.notes.all %}
+        <div class="pr2 flex">&#x1F4DD {{ note.text }} </div>
+        <div>{{ note.time_stamp }}</div>
+        {% endfor %}
+    </div>
 
 {% endblock %}
