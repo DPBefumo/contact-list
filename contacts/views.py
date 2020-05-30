@@ -20,19 +20,19 @@ def add_contact(request):
 
     return render(request, "contacts/add_contact.html", {"form": form})
 
-def add_notes(request, contact_pk):
+def add_note(request, contact_pk):
     contact = get_object_or_404(Contact, pk=contact_pk)
     if request.method == 'GET':
-        form = NoteForm(instance=contact)
+        form = NoteForm()
     else:
         form = NoteForm(data=request.POST)
         if form.is_valid():
-            note_form = form.save(commit=False)
-            note_form.contact = contact
-            note_form.save
+            note = form.save(commit=False)
+            note.contact = contact
+            note.save()
             return redirect(to='list_contacts')
 
-    return render(request, "contacts/add_notes.html", {
+    return render(request, "contacts/add_note.html", {
         "form": form,
         "contact": contact
         })
